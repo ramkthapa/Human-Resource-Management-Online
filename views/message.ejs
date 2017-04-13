@@ -1,0 +1,29 @@
+<% layout("layout") %>
+
+<div class="leftsmallbox">
+<ul class="namelist" class="css_namelist">
+<h3 class="colortext">NEW MESSAGE</h3>
+<%
+for(var row in msglist){
+%>
+<li><img src="../photo/<%=msglist[row]['id']%>.jpg" height="30px" width="30px" />
+    <a class="listanchor capitalize" href="/typeMessage?msgrec=<%=msglist[row]['id']%>"><%=msglist[row]["firstName"]+' '+msglist[row]['middleName']+' '+msglist[row]['lastName']+' ('+msglist[row]['count']+')'%> </a></li>
+<%
+}%>
+</ul>
+<ul class="namelist">
+    <h3 class="colortext">CHAT MEMBERS</h3>
+    <%
+    for(var row in allemp){
+            if(allemp[row]['id']!=userid){
+    %>
+    <li class="chatlist">
+
+
+        <img src="../photo/<%=allemp[row]['id']%>.jpg" height="30px" width="30px" />   <a href="/typeMessage?msgrec=<%=allemp[row]['id']%>" class="capitalize">   <%=allemp[row]["firstName"]+' '+allemp[row]['middleName']+' '+allemp[row]['lastName'] %> </a>
+    </li>
+    <%
+    }}%>
+</ul>
+
+</div>

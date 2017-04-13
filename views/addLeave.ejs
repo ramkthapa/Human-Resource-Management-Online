@@ -1,0 +1,39 @@
+<% layout("layout") %>
+<div class="three-columns">
+    <h1>Leave Details</h1>
+    <form method="post" action="/addLeave" class="contact-form" name="addLeave" onsubmit="return verify_addLeave()">
+		<div class="row">
+            <label for="leave-type">Type of leave:</label>
+            <div class="row">
+                <select name="leaveType">
+					<option value="">------Select------</option>
+                    <option value="Sick Leave">Sick Leave</option>
+                    <option value="Casual Leave">Casual Leave</option>
+                    <option value="Annual Leave">Annual Leave</option>
+				</select>
+            </div>
+        </div>
+		<div class="row">
+            <label for="leaveStartDate">Leave Start Date:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" name="startDate" class="date_input" value="Select date">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <label for="LeaveEndDate">Leave End Date:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" name="endDate" class="date_input" value="Select date">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="description">Description:</label>
+            <textarea row="15" cloumns="90" name="descript"></textarea>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+        <input class="Reset editsubmit" type="reset" value="Reset" />
+    </form>
+</div>

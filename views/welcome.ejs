@@ -1,0 +1,67 @@
+<% layout("layout") %>
+<div >
+    <div class="adminlog">
+         <span style="font-weight: bold;"> Welcome <%=useracc%> !<br></span>
+
+        <div class="margindown"></div>
+        <%if(title=='in'){
+            if(leave!=0){
+        %>
+        <span class="notification"><a href="/displayLeave">Leave application <%=leave%></a></span>
+        <%
+        }
+        else{}
+        }
+        else{
+        console.log(leave)
+            if(leave!=0){
+                %>
+            <span class="notification"><a href="/viewLeave">The admin views your Leave request</a></span>
+        <%
+        }
+            else{
+                  }
+        }
+        %>
+    </div>
+
+    <div class="noticeinner">
+        <h2 style="margin-left:15px;">Recent Notices</h2>
+        <ul class="topnav">
+        <%
+        var con=0;
+        for(var r in notices){}
+                for(var i=r; i>=0;i-- ){
+                if(con<5){
+        %>
+
+            <li class="mainlink">
+
+                <a href='#'><%= notices[i]["title"] %></a>
+
+                <ul style="display: none;">
+
+                    <li style="list-style: none; text-align:justify;">
+                        <%= notices[i]['notice']%>
+                        <span class="noticedate"><%= notices[i]["date"] %></span>
+                        </li>
+
+             </ul>
+       </li>
+
+        <% con++;
+        }}%>
+            </ul>
+       <!-- <a href=''class="seeall">see more..</a> -->
+    </div>
+
+    <div class="contentpart">
+        <h2>Our Company Policy</h2>
+
+        The payroll module automates the pay process by gathering data on employee time and attendance, calculating various deductions and taxes, and generating periodic pay cheques and employee tax reports. Data is generally fed from the human resources and time keeping modules to calculate automatic deposit and manual cheque writing capabilities.
+
+
+
+
+    </div>
+</div>

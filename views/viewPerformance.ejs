@@ -1,0 +1,33 @@
+<% layout("layout") %>
+
+
+
+<table class="altrowstable" id="alternatecolor">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Project</th>
+
+        <th>Action</th>
+
+    </tr>
+    <%
+    for(var row in data) {
+
+    %>
+    <tr>
+        <td><%= data[row]["empId"]%></td>
+        <td class="capitalize"><%= data[row]["fname"]%> <%= data[row]["mname"]%> <%= data[row]["lname"]%></td>
+
+        <td class="capitalize"><%= data[row]["project_name"]%></td>
+
+        <td>
+            <a href=/viewPerformanceDetails?id=<%=data[row]["id"]%>>View Details </a>|
+            <a href=/editPerformance?id=<%=data[row]["id"]%>>Edit </a>|
+            <a href=/deletePerformance?id=<%=data[row]["id"]%> onclick="return confirm('Are you Sure! You want to delete?')">Delete </a>
+        </td>
+    </tr>
+    <%
+    }
+    %>
+</table>

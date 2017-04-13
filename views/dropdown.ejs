@@ -1,0 +1,15 @@
+<label for="empname">Employee Name:</label>
+<div class="row" >
+
+
+<select name='employee_test'>
+
+    <option value="0">------Select Employee--------</option>
+    <%for(var row in empl){%>
+    <option  value="<%=empl[row]['id']%>"><%=empl[row]['firstName']+' '+empl[row]['middleName']+' '+empl[row]['lastName']%></option>
+    <%
+    }%>
+
+</select>
+
+</div>

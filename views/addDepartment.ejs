@@ -1,0 +1,82 @@
+<% layout("layout") %>
+<div class="innerpage">
+
+    <div class="innerpage-form">
+    <h1>Manage Department</h1>
+        <%
+        if(saved==1)
+        {
+        %>
+        <span style="color:#0000FF;">Saved Succuessfully !</span>
+
+        <%}
+            else if(saved==2){
+        %>
+        <span style="color:#0000FF;">Edited Succuessfully !</span>
+        <%}%>
+
+    <%if(datas==''){%>
+    <form method="post" action="/addDepartment" class="contact-form" name="addDep" onsubmit="return verify_addDep()">
+        <div class="depaction">Add Department:</div>
+        <span style="color:red; font-size:10px; "> All fields are mandatory</span>
+        <div style="margin-bottom:5px;"></div>
+        <div class="row">
+            <label for="dep" class="widthMore">Department Name:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" value="" name="txtDepartment">
+                </div>
+            </div>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+        <input class="Reset editsubmit" type="reset" value="Reset" />
+    </form>
+
+
+    <%}
+    else {%>
+    <form method="post" action="/editDepartment" class="contact-form" name="addDep" onsubmit="return verify_addDep()">
+        <div class="depaction">Edit Department:</div>
+        <span style="color:red; font-size:10px; "> All fields are mandatory</span>
+        <div style="margin-bottom:5px;"></div>
+        <div class="row">
+            <label for="dep" class="widthMore">Department Name:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" value="<%=datas['departmentName']%>" name="txtDepartment">
+                </div>
+                <input type="hidden" value="<%=datas['id']%>" name="txtid">
+            </div>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+        <input class="Reset editsubmit" type="reset" value="Reset" />
+    </form>
+
+
+
+    <%}%>
+
+        <table class="altrowstable" id="alternatecolor">
+            <tr>
+
+                <th>Department Name</th>
+                <th>Action</th>
+
+            </tr>
+            <%
+            for(var row in user) {
+            %>
+            <tr>
+
+                <td class="capitalize"><%= user[row]["departmentName"]%> </td>
+                <td>
+                    <a href=/editDep?id=<%=user[row]["id"]%>>Edit </a>|
+                    <a href=/deleteDepartment?id=<%=user[row]["id"]%> onclick="return confirm('Are you Sure! You want to delete?')">Delete </a>
+                </td>
+            </tr>
+            <%
+            }
+            %>
+        </table>
+</div>
+</div>

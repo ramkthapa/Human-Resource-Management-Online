@@ -1,0 +1,47 @@
+<% layout("layout") %>
+<h1>Employees Listing</h1>
+<table class="altrowstable" id="alternatecolor">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Email</th>
+
+        <th>Action</th>
+
+    </tr>
+
+    <%
+    for(var row in user) {
+    if(user[row]['id']==1)
+    {
+    %>
+
+    <% }
+    else
+    {
+    %>
+
+    <tr>
+        <td><%= user[row]["id"]%></td>
+        <td class="capitalize"><%= user[row]["firstName"]%> <%= user[row]["middleName"]%> <%= user[row]["lastName"]%></td>
+        <%
+        for(var rows in data) {
+                if(user[row]['position']==data[rows]['id']){
+        %>
+        <td><%= data[rows]["positionName"]%></td>
+        <td><%= user[row]["email"]%></td>
+
+        <%}}%>
+
+
+        <td style="width:180px;">
+            <a href=/viewDetails?id=<%=user[row]["id"]%>>View Details </a>|
+            <a href=/editEmployee?id=<%=user[row]["id"]%>>Edit </a>|
+            <a href=/deleteEmployee?id=<%=user[row]["id"]%> onclick="return confirm('Are you Sure! You want to delete?')">Delete </a>
+        </td>
+    </tr>
+    <%
+    }}
+    %>
+</table>

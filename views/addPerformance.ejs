@@ -1,0 +1,275 @@
+<% layout("layout") %>
+<div class="innerpage" >
+
+<div class="innerpage-form">
+
+    <%if(data==''){%>
+    <h1>Add Performance Appraisal</h1>
+    <%
+    if(saved==1)
+    {
+    %>
+    <span style="color:#0000FF;">Saved Succuessfully !</span>
+
+    <%}
+    else if(saved==2){
+    %>
+    <span style="color:#0000FF;">Edited Succuessfully !</span>
+    <%}%>
+    <form action="/savePerformance" class="contact-form" method="post" name="addPer" onsubmit="return verify_addPer()">
+        <span style="color:red; font-size:10px; "> All fields are mandatory</span>
+        <div style="margin-bottom:5px;"></div>
+        <div class="row">
+            <label for="depname">Department:</label>
+            <div class="row">
+                <select name='department' id='department'>
+                    <option value="0">------Select Department--------</option>
+                    <%for(var row in department){%>
+                    <option  value="<%=department[row]['id']%>"><%=department[row]['departmentName']%></option>
+                    <%
+                    }%>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" id="row1">
+
+        </div>
+
+		<div class="row">
+            <label for="projectName">Project Name:</label>
+            <div class="row">
+                <div class="text">
+
+                    <input id="project" name="project" type="text" value="" />
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <label for="From">Begin:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" name="project_begin" class="date_input" value="Select Date">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <label for="T0">End:</label>
+            <div class="roo">
+                <div class="text">
+                    <input type="text" name="project_end" class="date_input" value="Select Date">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <label for="rating">Rating</label>
+            <div class="row">
+                    <select name='rating' id='rating'>
+                        <option value="0">---------------Rating--------------</option>
+
+                        <option  value="5">Excellent</option>
+                        <option  value="4">Very Good</option>
+                        <option  value="3">Good</option>
+                        <option  value="2">Satisfactory</option>
+                        <option  value="1">Weak</option>
+                        <option</option>
+
+                    </select>
+
+            </div>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+    </form>
+
+    <%}
+    else if (edit=='1'){%>
+
+<h1>Edit Performance Appraisal</h1>
+    <form action="/edit_appraisal" class="contact-form" method="post">
+        <span style="color:red; font-size:10px; "> All fields are mandatory</span>
+        <div style="margin-bottom:5px;"></div>
+
+        <input type="hidden"  name="per_id" type="text" value="<%=data[0]['id']%> " />
+
+        <div class="row" >
+
+            <label for="projectName">Employeee :</label>
+            <div class="row">
+                <div class="text">
+
+                    <input readonly="true" class="readonly"   id="emp" name="emp" type="text" value="<%=data[0]['fname']%> <%=data[0]['mname']%> <%=data[0]['lname']%>" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="depname">Department:</label>
+            <div class="row">
+                <div class="text">
+
+                    <input readonly="true" class="readonly" id="depart_edit" name="depart_edit" type="text" value="<%=data[0]['dname']%>" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="projectName">Project Name:</label>
+            <div class="row">
+                <div class="text">
+
+                    <input id="project" name="project" type="text" value="<%=data[0]['project_name']%>" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <label for="From">Begin:</label>
+
+            <div class="row">
+                <div class="text">
+                    <input type="text" name="project_begin" class="date_input" value="<%=data[0]['project_begin']%>">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="T0">End:</label>
+            <div class="roo">
+                <div class="text">
+                    <input type="text" name="project_end" class="date_input" value="<%=data[0]['project_end']%>">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="rating">Rating</label>
+            <div class="row">
+
+                <select name='rating' id='rating'>
+                    <option>---------------Rating--------------</option>
+
+                    <option  value="5" <%if(data[0]['rating']=='5') {%> selected <%}%>>Excellent</option>
+                    <option  value="4" <%if(data[0]['rating']=='4') {%> selected <%}%>>Very Good</option>
+                    <option  value="3" <%if(data[0]['rating']=='3') {%> selected <%}%>>Good</option>
+                    <option  value="2" <%if(data[0]['rating']=='2') {%> selected <%}%>>Satisfactory</option>
+                    <option  value="1" <%if(data[0]['rating']=='1') {%> selected <%}%>>Weak</option>
+
+                </select>
+
+            </div>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+    </form>
+<%}
+
+else if (edit=='0')
+{%>
+
+    <h1>Performance Appraisal Details</h1>
+
+    <form action="" class="contact-form" method="post">
+        <div class="contact-form-left">
+        <div class="row capitalize">
+            <label for="depname">Department:</label>
+
+             <%=data[0]['dname']%>
+
+        </div>
+
+        <div class="row" >
+
+            <label for="employeeName">Employee Name:</label>
+            <div class="row capitalize">
+
+
+                <%=data[0]['fname']%> <%=data[0]['mname']%> <%=data[0]['lname']%>
+
+            </div>
+        </div>
+
+        <div class="row" >
+
+            <label for="positionName">Position Name:</label>
+            <div class="row">
+
+
+                <%=data[0]['pname']%>
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+            <label for="projectName">Project Name:</label>
+            <div class="row">
+
+
+                   <%=data[0]['project_name']%>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="From">Begin:</label>
+            <div class="row">
+
+                    <%=data[0]['project_begin']%>
+                </div>
+
+        </div>
+
+        <div class="row">
+            <label for="T0">End:</label>
+
+                <%=data[0]['project_end']%>
+
+        </div>
+        <div class="row">
+            <label for="rating">Rating:</label>
+            <div class="row">
+
+
+                <%if(data[0]['rating']=='5') {%>Excellent  <%}%>
+           <% if(data[0]['rating']=='4') {%> Very Good <%}%>
+                 <%if(data[0]['rating']=='3') {%> Good <%}%>
+              <%if(data[0]['rating']=='2') {%>Satisfactory  <%}%>
+                <%if(data[0]['rating']=='1') {%>Weak  <%}%>
+
+
+            </div>
+        </div>
+        </div>
+
+        <div class ="contact-form-right">
+
+
+            <img src="../photo/<%=data[0]['empId']%>.jpg" height="95px" width="95px" />
+
+
+        </div>
+
+        <div style="clear:both"></div>
+
+    </form>
+    <%}%>
+
+</div>
+    </div>
+
+
+
+<script>
+    $(document).ready(function(){
+        $('#department').change(function(){
+            var depid = { search: $(this).val() };
+
+            $.get('/ajax/performance',depid, function(data){
+                $('#row1').html(data);
+            });
+        });
+    });
+
+</script>

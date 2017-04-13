@@ -1,0 +1,64 @@
+<% layout("layout") %>
+<div class="leftsmallbox">
+    <ul class="namelist" class="css_namelist">
+        <h3 class="colortext">NEW MESSAGE</h3>
+        <%
+        for(var row in msglist){
+        %>
+        <li><img src="../photo/<%=msglist[row]['id']%>.jpg" height="30px" width="30px" />
+            <a class="listanchor capitalize" href="/typeMessage?msgrec=<%=msglist[row]['id']%>"><%=msglist[row]["firstName"]+' '+msglist[row]['middleName']+' '+msglist[row]['lastName']+' ('+msglist[row]['count']+')'%> </a></li>
+        <%
+        }%>
+    </ul>
+    <ul class="namelist">
+        <h3 class="colortext">CHAT MEMBERS</h3>
+        <%
+        for(var row in allemp){
+                if(allemp[row]['id']!=userid){
+        %>
+        <li class="chatlist">
+
+
+            <img src="../photo/<%=allemp[row]['id']%>.jpg" height="30px" width="30px" />   <a  href="/typeMessage?msgrec=<%=allemp[row]['id']%>" class="capitalize">   <%=allemp[row]["firstName"]+' '+allemp[row]['middleName']+' '+allemp[row]['lastName'] %> </a>
+        </li>
+        <%
+        }}%>
+    </ul>
+
+
+</div>
+
+<div class="rightsmallbox">
+
+    <div class="rightsmallfirst">
+       <!-- <h3 style="color:#2e2e2e; font-style:italic;">Message to ""</h3> -->
+        <form method="post" action="/sendMessage" class="contact-form" id="manualwidth" name="message" onsubmit="return verify_message()">
+            <div class="row">
+                <label for="description" style="font-weight:bold; width:150px;">Message To <span style="font-style:italic; color:#0000FF;  "><%=msgto['Name']%></span>:</label>
+                <textarea rows="5" cols="45" name="txtmsg"></textarea>
+            </div>
+            <input class="btn-submit" type="submit" value="Send" />
+
+        </form>
+
+    </div>
+
+    <div class="viewmessages">
+        <h2>Recent Messages</h2>
+        <% for(var row in msg){
+
+        %>
+        <div class="msgrec " id="new_msgrec">
+            <img src="../photo/<%=msg[row]['from']%>.jpg" height="30px" width="30px" />
+            <span class="capitalize"> <%=msg[row]['name']%>:</span> <%= msg[row]['msg'] %></div><div class="msgdate"><%= msg[row]['date']%>
+        </div>
+        <%if(msg[row]['from']==userid && msg[row]['read']=='1'){%>
+        <div class="msgdate">seen</div><%}else{}%>
+        <%}%>
+    </div>
+
+
+</div>
+
+
+

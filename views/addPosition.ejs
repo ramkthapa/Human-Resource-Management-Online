@@ -1,0 +1,80 @@
+<% layout("layout") %>
+<div class="innerpage">
+
+    <div class="innerpage-form">
+    <h1>Manage Position</h1>
+        <%
+        if(saved==1)
+        {
+        %>
+        <span style="color:#0000FF;">Saved Succuessfully !</span>
+
+        <%}
+            else if (saved==2)
+        {
+            %>
+        <span style="color:#0000FF;">Edited Succuessfully !</span>
+        <%
+
+        }
+        %>
+    <%if(datas==''){%>
+    <form method="post" action="/addPosition" class="contact-form" name="addPos" onsubmit="return verify_addPos()">
+        <div class="depaction">Add Position:</div>
+        <div class="row">
+            <label for="position">Position Name:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" value="" name="txtPosition">
+                </div>
+            </div>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+        <input class="Reset editsubmit" type="reset" value="Reset" />
+    </form>
+    <%}
+    else {%>
+
+    <form method="post" action="/editPosition" class="contact-form" name="addPer" onsubmit="return verify_addPer()">
+        <div class="depaction">Edit Position:</div>
+        <div class="row">
+            <label for="position">Position Name:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" value="<%=datas['positionName']%>" name="txtPosition">
+                </div>
+                <input type="hidden" value="<%=datas['id']%>" name="txtid">
+            </div>
+        </div>
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+        <input class="Reset editsubmit" type="reset" value="Reset" />
+    </form>
+
+    <%}%>
+
+    <table class="altrowstable" id="alternatecolor">
+        <tr>
+
+            <th>Position Name</th>
+            <th>Action</th>
+
+        </tr>
+        <%
+        for(var row in user) {
+        %>
+        <tr>
+
+            <td class="capitalize"><%= user[row]["positionName"]%> </td>
+            <td>
+                <a href=/editPos?id=<%=user[row]["id"]%>>Edit </a>|
+                <a href=/deletePosition?id=<%=user[row]["id"]%> onclick="return confirm('Are you Sure! You want to delete?')">Delete </a>
+            </td>
+        </tr>
+        <%
+        }
+        %>
+    </table>
+
+</div>
+
+</div>

@@ -1,0 +1,116 @@
+<% layout("layout") %>
+
+<div class="innerpage">
+    <div class="innerpage-form">
+    <h1>Notice</h1>
+        <%
+        if(saved==1)
+        {
+        %>
+        <span style="color:#0000FF;">Saved Succuessfully !</span>
+
+        <%}
+        else if(saved==2){
+        %>
+        <span style="color:#0000FF;">Edited Succuessfully !</span>
+        <%}%>
+    <%if(datas==''){%>
+    <form method="post" action="/actNotice" class="contact-form" name="addNotice" onsubmit="return verify_addNotice()">
+
+        <div class="depaction">Add Notice:</div>
+        <span style="color:red; font-size:10px; "> All fields are mandatory</span>
+        <div style="margin-bottom:5px;"></div>
+    <div class="row">
+                <label for="noticeTitle">Notice Title:</label>
+                <div class="row">
+                    <div class="text">
+                        <input type="text" name="txtnoticeTitle"  value="">
+                    </div>
+                </div>
+            </div>
+    <div class="row">
+                    <label for="noticeType">Notice Type:</label>
+                    <div class="row">
+                        <select name="txtnoticeType">
+                            <option value="">------Select------</option>
+                            <option value="0">Private</option>
+                            <option value="1">Public</option>
+                        </select>
+                    </div>
+                </div>
+	<div class="row">
+            <label for="notice">Notice:</label>
+            <textarea rows="4" cols="30" name="txtNotice"></textarea>
+    </div>
+
+
+		<input class="btn-submit editsubmit" type="submit" value="Submit" />
+    </form>
+
+    <%}
+    else {%>
+    <form method="post" action="/editNotice" class="contact-form" name="addNotice" onsubmit="return verify_addNotice()">
+        <div class="depaction">Edit Notice:</div>
+        <span style="color:red; font-size:10px; "> All fields are mandatory</span>
+        <div style="margin-bottom:5px;"></div>
+        <div class="row">
+            <label for="noticeTitle">Notice Title:</label>
+            <div class="row">
+                <div class="text">
+                    <input type="text" name="txtnoticeTitle"  value="<%=datas['title']%>">
+                    <input type="hidden" name="txtid" value="<%=datas['id']%>">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="noticeType">Notice Type:</label>
+            <div class="row">
+                <select name="txtnoticeType">
+                    <option value="">------Select------</option>
+
+                    <option  value="0" <%if(datas['type']=='0') {%> selected <%}%>>Private</option>
+                    <option  value="1" <%if(datas['type']=='1') {%> selected <%}%>>Public</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label for="notice">Notice:</label>
+            <textarea rows="4" cols="30" name="txtNotice"><%=datas['notice']%></textarea>
+        </div>
+
+
+        <input class="btn-submit editsubmit" type="submit" value="Submit" />
+    </form>
+
+    <%}%>
+        <table class="altrowstable" id="alternatecolor">
+            <tr>
+
+                <th>Date</th>
+                <th>Title</th>
+                <th>Notice Type</th>
+                <th>Action</th>
+
+            </tr>
+            <%
+            for(var row in user) {
+            %>
+            <tr>
+
+                <td><%= user[row]["date"]%> </td>
+                <td class="capitalize"><%= user[row]["title"]%> </td>
+                <td><%if(user[row]["type"]=='1'){%>Public<%}else{%>Private<%}%></td>
+                <td>
+                    <a href=/editNot?id=<%=user[row]["id"]%>>Edit </a>|
+                    <a href=/deleteNotice?id=<%=user[row]["id"]%> onclick="return confirm('Are you Sure! You want to delete?')">Delete </a>
+                </td>
+            </tr>
+            <%
+            }
+            %>
+        </table>
+
+</div>
+
+</div>

@@ -1,0 +1,38 @@
+<% layout("layout") %>
+<div class="innerpage">
+
+    <div class="innerpage-form">
+<table class="altrowstable" id="alternatecolor">
+   <%if(title=='emp'){%>
+    <tr>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Remark</th>
+    </tr>
+    <% for(var row in leave){%>
+    <tr>
+        <td><%= leave[row]['leaveType']%></td>
+        <td><%= leave[row]['leaveStart']%></td>
+        <td><%= leave[row]['leaveEnd']%></td>
+        <td><% if(leave[row]['status']==1){%>Accepted <%}else{%>Rejected<%}%></td>
+    </tr><%}}
+    else{%>
+    <tr>
+        <th>Employee Name</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Remark</th>
+    </tr>
+    <% for(var row in leave){%>
+    <tr>
+        <td class="capitalize"><%= leave[row]['firstName']+' '+leave[row]['middleName']+' '+leave[row]['lastName']%></td>
+        <td><%= leave[row]['leaveType']%></td>
+        <td><%= leave[row]['leaveStart']%></td>
+        <td><%= leave[row]['leaveEnd']%></td>
+        <td><% if(leave[row]['status']==1){%>Accepted <%}else{%>Rejected<%}%></td>
+    </tr><%}}%>
+</table>
+        </div>
+    </div>

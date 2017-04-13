@@ -1,0 +1,24 @@
+<% layout("layout") %>
+<div class="innerpage">
+
+    <div class="innerpage-form">
+<table class="altrowstable" id="alternatecolor">
+    <tr>
+        <th>Employee Name</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Action</th>
+    </tr>
+    <% for(var row in leave){%>
+    <tr>
+        <td class="capitalize"><%=leave[row]['firstName']+' '+leave[row]['middleName']+' '+leave[row]['lastName']%></td>
+        <td><%= leave[row]['leaveType']%></td>
+        <td><%= leave[row]['leaveStart']%></td>
+        <td><%= leave[row]['leaveEnd']%></td>
+        <td><a href=/acceptLeave?id=<%=leave[row]["id"]%>>Accept</a> | <a href=/rejectLeave?id=<%=leave[row]["id"]%>>Reject</a></td>
+    </tr><%}%>
+</table>
+
+ </div>
+    </div>
